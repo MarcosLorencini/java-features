@@ -1,6 +1,7 @@
 package lambda.methodreference;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MethodReference_CustomType {
 
@@ -30,7 +31,30 @@ public class MethodReference_CustomType {
 
         // expressões lambda equivalentes utilizando construtor
         Function<Pessoa, SuperHeroi> transformaEmHeroiConstrutor1 = p -> new SuperHeroi(p);
-       // Function<Pessoa, SuperHeroi> transformaEmHeroiConstrutor2 = p -> SuperHeroi::new;
+        Function<Pessoa, SuperHeroi> transformaEmHeroiConstrutor2 = SuperHeroi::new;
+
+        // expressões lambda equivalentes utilizando chamada de método comum,
+        // mas referenciando o método da classe
+        Function<Pessoa, SuperHeroi> transformaEmHeroiClasse1 = p -> p.vireSuperHeroi();
+        Function<Pessoa, SuperHeroi> transformaEmHeroiClasse2 = Pessoa::vireSuperHeroi;
+
+        // expressões lambda equivalentes utilizando chamada de método comum, mas
+        //referenciando o método do objeto
+        Pessoa pessoa = new Pessoa();
+        Supplier<SuperHeroi> transformaEmHeroiInstancia1 = () -> pessoa.vireSuperHeroi();
+        Supplier<SuperHeroi> transformaEmHeroiInstancia2 = pessoa::vireSuperHeroi;
+
+        //Perceba a diferença entre as expressões lambda:
+        //◦ Uma parte implementa a interface functional Function, pois recebem um argumento e
+        //retornam um valor.
+        //◦ A última implementa a interface functional Supplier, pois não recebe argumento, mas
+        //retorna um valor.
+        //Em caso de dúvidas, consulte novamente os tipos de interfaces funcionais nas outras seções
+        //deste capítulo.
+
+
+
+
 
 
     }
