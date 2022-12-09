@@ -17,9 +17,22 @@ public class Locks_TryLockTimeout {
         try {
             //tenta obter o lock por no máximo 1 segundo
             temLock = lock.tryLock(1, TimeUnit.SECONDS);
+
         } catch (InterruptedException e) {
             System.out.println("Não obteve o Lock");
         }
+
+        if (temLock) {
+            try {
+                System.out.println("ABC");
+            } finally {
+                lock.unlock(); //desfaz o lock
+            }
+        } else {
+            System.out.println("DEF");
+        }
+
+        //ABC
 
 
     }
